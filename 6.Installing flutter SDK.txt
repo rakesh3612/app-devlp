@@ -1,0 +1,14 @@
+6.Installing and configuring Flutter SDK.
+
+1.In Google search type flutter download for windows and click on the second link.
+	After downloading copy the flutter and go to C Drive create one folder as src and paste inside src folder.
+2.Open edit environment variable and select the path click on Edit and copy the address C:\src\flutter\bin and paste here 	and click on ok.
+3.In Google search type Dart download for windows and click on the second link.
+	After downloading double click the file and go to C Drive create one folder as tools and select upto tools folder.
+4.Open edit environment variable and select the path click on Edit and copy the address C:\tools\dart\dart-sdk\bin and paste 	here and click on ok.
+5.Open Android Studio select plugins and search Flutter Install it and search Dart install it.
+6.Right side of Android studio click on Actions and select SDK manager  and select SDK Platforms  Click on Android API 34  	and click on Apply and	Finish.
+7.14.Android SDK  Go to SDK tools select 1.Android SDK Built Tools 35 2.Android SDK ( Command- line Tools) 3.Android 	Emulator 4.Android Platform tools and click on Apply and  Finish.
+8.In Google search type IntelliJ IDEA download for windows and click on the first link scroll down and select IntelliJ IDEA 	Community Edition and Download and install it.
+9.Open IntelliJ IDEA go to Plugins search Dart and install it.
+10.For creating a new project go to projects->new projects->select Dart and set the tools as  C:\tools\dart\dart-sdk and 	give the project name and type the code.                                   
