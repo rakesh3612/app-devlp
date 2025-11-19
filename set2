@@ -1,0 +1,140 @@
+activity_main.xm
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/btnToast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Custom Toast" />
+
+</LinearLayout>
+
+
+custom_toast_layout.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/viewContainer"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="10dp"
+    android:background="#99C34A">
+
+    <ImageView
+        android:layout_width="90dp"
+        android:layout_height="103dp"
+        android:src="@drawable/baseline_cloud_done_24" />
+
+    <TextView
+        android:id="@+id/txtMsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Text Message"
+        android:textColor="#FFF"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+</LinearLayout>
+
+
+
+
+MainActivity.java
+package com.example.experiments;
+
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    Button btnToast;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        btnToast = findViewById(R.id.btnToast);
+
+        btnToast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Custom Toast
+                Toast toast = new Toast(getApplicationContext());
+
+                View view = getLayoutInflater().inflate(
+                        R.layout.custom_toast_layout,
+                        (ViewGroup) findViewById(R.id.viewContainer)
+                );
+
+                TextView txtMsg = view.findViewById(R.id.txtMsg);
+                txtMsg.setText("Operation Successful!");
+
+                toast.setView(view);
+                toast.setGravity(Gravity.TOP | Gravity.END, 0, 0);
+                toast.setDuration(Toast.LENGTH_LONG);
+                toast.show();
+            }
+        });
+    }
+}
+
+
+
+pizza b
+
+import 'dart:io';
+import 'dart:math' as math;
+
+void main() {
+  print("Pizza Price List:");
+  print("Small: 150 Rs");
+  print("Medium: 190 Rs");
+  print("Large: 240 Rs\n");
+
+  // Input pizza size
+  print("Please enter your pizza size (Small, Medium, Large):");
+  String pizzaSize = stdin.readLineSync()!.trim();
+
+  // Input quantity
+  print("How many $pizzaSize pizzas do you want?");
+  int pizzaQty = int.parse(stdin.readLineSync()!);
+
+  int price = 0;
+
+  // Checking sizes
+  if (pizzaSize.toLowerCase() == "small") {
+    price = 150;
+  } else if (pizzaSize.toLowerCase() == "medium") {
+    price = 190;
+  } else if (pizzaSize.toLowerCase() == "large") {
+    price = 240;
+  } else {
+    print("Invalid pizza size input!");
+    return;
+  }
+
+  // Total price
+  int total = pizzaQty * price;
+
+  print("\nYour total payment is: ₹$total");
+}
+
