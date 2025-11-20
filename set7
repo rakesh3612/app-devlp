@@ -1,0 +1,82 @@
+1. app.py (Corrected Working Version)
+from flask import Flask, request, render_template
+
+app = Flask(__name__)
+
+def load_questions():
+    questions = {}
+    with open("python_questions.txt", "r") as file:
+        lines = file.readlines()
+        for line in lines:
+            if "111" in line:
+                question, answer = line.strip().split("111")
+                questions[question.strip()] = answer.strip()
+    return questions
+
+python_questions = load_questions()
+
+@app.route("/")
+def chatbot_page():
+    return render_template("chatbot.html")
+
+@app.route("/ask", methods=["POST"])
+def answer_question():
+    user_question = request.form.get("user-question").strip()
+
+    if user_question in python_questions:
+        answer = python_questions[user_question]
+    else:
+        answer = "Sorry, I don't know the answer to that question."
+
+    return render_template("chatbot.html",
+                           user_question=user_question,
+                           answer=answer)
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
+✅ 2. chatbot.html (Corrected Version)
+
+👉 Save inside templates/chatbot.html
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Python Chatbot</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css">
+</head>
+
+<body>
+<div class="container mt-5">
+
+    <h1>Python Chatbot</h1>
+
+    <form method="post" action="/ask">
+        <div class="form-group">
+            <label for="user-question">Ask a Python Question:</label>
+            <input type="text" class="form-control" id="user-question" name="user-question" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    {% if user_question %}
+        <h2 class="mt-4">Your Question:</h2>
+        <p>{{ user_question }}</p>
+
+        <h2>Answer:</h2>
+        <p>{{ answer }}</p>
+    {% endif %}
+
+</div>
+</body>
+</html>
+
+✅ 3. python_questions.txt
+
+👉 Save in root folder named exactly:
+
+python_questions.txt
+
+What is python? 111 Python is a high-level programming language.
+How to declare a variable in python? 111 You can declare a variable in python using the assignment operator (=).
