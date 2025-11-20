@@ -1,0 +1,82 @@
+1. app.py (Correct Working Code)
+from flask import Flask, request, render_template, redirect, url_for
+
+app = Flask(__name__)
+
+# Sample database
+database = {
+    "emrit": "123",
+    "mallareddy": "hyd"
+}
+
+@app.route("/")
+def home():
+    return render_template("login.html")
+
+@app.route("/form_login", methods=["POST", "GET"])
+def login():
+    if request.method == "POST":
+        name1 = request.form['Username']
+        pwd = request.form['Password']
+
+        # Check if username exists
+        if name1 not in database:
+            return render_template("login.html", info="Invalid Username")
+
+        # Check password
+        if database[name1] != pwd:
+            return render_template("login.html", info="Invalid Password")
+
+        # Success → Go to home page
+        return render_template("home.html", name=name1)
+
+    return render_template("login.html")
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
+✅ 2. login.html (Corrected)
+
+👉 Save inside templates/login.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+</head>
+<body bgcolor="lavender">
+
+<form action="/form_login" method="post">
+    <h2>Username:</h2>
+    <input type="text" name="Username" required>
+
+    <h2>Password:</h2>
+    <input type="password" name="Password" required>
+    <br><br>
+
+    <input type="submit" value="Login">
+</form>
+
+<h1>{{ info }}</h1>
+
+</body>
+</html>
+
+✅ 3. home.html (Corrected)
+
+👉 Save inside templates/home.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body bgcolor="teal">
+
+<h1 align="center">Welcome {{ name }}</h1>
+
+</body>
+</html>
